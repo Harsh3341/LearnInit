@@ -10,7 +10,10 @@ export default function Home() {
   console.log(data);
 
   return data.data.map((video: any) => (
-    <Link href={`https://www.youtube.com/watch?v=${video.videoId}`}>
+    <Link
+      href={`https://www.youtube.com/watch?v=${video.videoId}`}
+      key={video.id}
+    >
       <div key={video.id} className="m-10 h-auto w-96">
         <img src={video.thumbnailUrl} alt="" className="rounded-xl w-96 h-56" />
         {/* <p>{video.description}</p> */}
