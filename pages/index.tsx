@@ -1,4 +1,4 @@
-import fetcher from "@/lib/fetcher";
+import fetcher from "@/libs/fetcher";
 import Link from "next/link";
 import useSWR from "swr";
 
@@ -9,7 +9,7 @@ export default function Home() {
   if (!data) return <div>loading...</div>;
   console.log(data);
 
-  return data.data.map((video: any) => (
+  return data.map((video: any) => (
     <Link
       href={`https://www.youtube.com/watch?v=${video.videoId}`}
       key={video.id}

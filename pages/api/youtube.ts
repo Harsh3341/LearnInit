@@ -1,15 +1,11 @@
-import mongoose, { ConnectOptions } from "mongoose";
-import VideoModel from "@/models/video";
+import { NextApiRequest, NextApiResponse } from "next";
 
-mongoose.connect(
-  process.env.MONGODB_URI as string,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  } as ConnectOptions
-);
+import prisma from "@/libs/prismadb";
 
-export default async (req: any, res: any) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method !== "GET") {
+    return res.status(405).json({ message: "Method not allowed" });
+  }
   try {
     const key = process.env.YOUTUBE_API_KEY;
     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=100&q=javascript&key=${key}`;
@@ -21,27 +17,22 @@ export default async (req: any, res: any) => {
       description: item.snippet.description || "",
       thumbnailUrl: item.snippet.thumbnails.medium.url || "",
     }));
-    // check for existing videos
-    const existingVideos = await VideoModel.find({
-      videoId: { $in: videos.map((video: any) => video.videoId) },
+
+    videos.forEach(async (video: any) => {
+      const data = await prisma.video.findFirst({
+        where: {
+          videoId: video.videoId,
+        },
+      });
+      if (!data) {
+        await prisma.video.create({
+          data: video,
+        });
+      }
     });
 
-    // filter out existing videos
-    const newVideos = videos.filter(
-      (video: any) =>
-        !existingVideos.find(
-          (existingVideo: any) => existingVideo.videoId === video.videoId
-        )
-    );
-
-    // insert new videos
-    if (newVideos.length > 0) {
-      await VideoModel.insertMany(newVideos);
-    }
-
-    res.status(200).json({ videos });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(200).json({ message: "Success" });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 };
