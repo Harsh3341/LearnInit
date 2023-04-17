@@ -1,7 +1,3 @@
-import fetcher from "@/libs/fetcher";
-import useSWR from "swr";
-import Dashboard from "./layout/sidebar";
-
 interface LayoutProps {
   children: React.ReactNode;
 }
