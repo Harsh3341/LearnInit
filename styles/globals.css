@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 :root {
-  color: white;
+  @apply h-full text-white;
+}
+
+body {
+  @apply h-full bg-[url('../public/background/FkDSP0OacAAJga8.jfif')] bg-cover bg-no-repeat bg-center backdrop-blur-md;
 }
