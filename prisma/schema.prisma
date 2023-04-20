@@ -7,10 +7,41 @@ datasource db {
     url = env("MONGODB_URI")
 }
 
-model Video{
-    id String @id @default(auto()) @map("_id") @db.ObjectId
-    videoId String @unique
-    title String
+model Video {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  type           String
+  videoId        String        @unique
+  playlistItems  PlaylistItem[]
+  title          String
+  description    String
+  thumbnailUrl   String
+  publishedAt    DateTime
+  channelTitle   String
+  channelId      String
+  details        VideoDetails?
+}
+
+
+model PlaylistItem {
+    id          String        @id @default(auto()) @map("_id") @db.ObjectId
+    videoId     String?
+    title       String
     description String
     thumbnailUrl String
+    publishedAt DateTime
+    channelTitle String
+    channelId   String
+    playlistId  String?
+    video       Video?        @relation(fields: [videoId], references: [videoId])
+}
+
+model VideoDetails {
+    id          String        @id @default(auto()) @map("_id") @db.ObjectId
+    videoId     String        @unique
+    video       Video         @relation(fields: [videoId], references: [videoId])
+    duration    String
+    viewCount   String
+    likeCount   String
+    favoriteCount String
+    commentCount String
 }
