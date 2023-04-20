@@ -13,7 +13,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 }) => {
   return (
     <div className="flex flex-col items-center">
-      <Icon size={28} color="white" />
+      <Icon size={28} />
     </div>
   );
 };

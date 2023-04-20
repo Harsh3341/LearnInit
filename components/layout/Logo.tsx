@@ -4,7 +4,7 @@ const Logo = () => {
       <img
         src="/logo.png"
         alt="logo"
-        className="invert"
+        // className="invert"
         width={100}
         height={100}
       />

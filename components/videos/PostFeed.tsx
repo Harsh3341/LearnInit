@@ -12,7 +12,7 @@ const PostFeed = () => {
   }
 
   return (
-    <div className="h-full w-full flex flex-wrap">
+    <div className="h-full w-full flex flex-wrap justify-evenly">
       {videos.map((video: Record<string, any>) => (
         <PostItem key={video.id} data={video} />
       ))}
