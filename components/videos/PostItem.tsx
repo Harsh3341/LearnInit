@@ -27,8 +27,8 @@ const PostItem: React.FC<PostItemProps> = ({ data }) => {
             src={data.thumbnailUrl}
             alt=""
             className="rounded-xl w-96 h-56 shadow-md transition ease-in-out delay-50  hover:-translate-y-1 hover:scale-110 duration-200"
-            width={100}
-            height={100}
+            width={960}
+            height={960}
           />
           <span className="bg-black text-white rounded-md absolute right-2 bottom-2 bg-opacity-80 p-1">
             {video.details.duration}

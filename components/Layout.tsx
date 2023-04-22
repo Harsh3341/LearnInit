@@ -16,7 +16,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Topbar />
           </div>
           <div className="rounded-3xl w-full bg-white bg-opacity-20 overflow-auto h-full p-7 scrollbar-hide border border-black/20 shadow-inner scroll-smooth ">
-            <CategoriesBar />
             {children}
           </div>
         </div>
