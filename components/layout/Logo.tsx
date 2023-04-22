@@ -1,13 +1,9 @@
+import Image from "next/image";
+
 const Logo = () => {
   return (
     <div className="flex justify-center items-center h-full">
-      <img
-        src="/logo.png"
-        alt="logo"
-        // className="invert"
-        width={100}
-        height={100}
-      />
+      <Image src="/logo.png" alt="logo" width={100} height={100} />
     </div>
   );
 };

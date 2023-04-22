@@ -12,7 +12,7 @@ const Searchbar = () => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <FaSearch />
+      <FaSearch className="hover:cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300" />
     </div>
   );
 };
