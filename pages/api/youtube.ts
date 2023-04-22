@@ -7,14 +7,17 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(405).json({ message: "Method not allowed" });
   }
   try {
+    const toSearch = req.query.q || "javascript";
+
     const key = process.env.YOUTUBE_API_KEY;
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=100&q=javascript&key=${key}`;
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&order=viewCount&maxResults=100&q=${toSearch}&key=${key}`;
     const response = await fetch(url);
     const json = await response.json();
     const videos = json.items.map((item: any) => ({
       type: item.id.kind || "",
       videoId: item.id.videoId || item.id.playlistId || item.id.channelId || "",
       title: item.snippet.title || "",
+      category: toSearch,
       description: item.snippet.description || "",
       thumbnailUrl: item.snippet.thumbnails.medium.url || "",
       publishedAt: item.snippet.publishedAt || "",

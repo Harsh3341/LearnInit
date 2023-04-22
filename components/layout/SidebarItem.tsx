@@ -7,6 +7,7 @@ interface SidebarItemProps {
   href?: string;
   icon: IconType;
   onClick?: () => void;
+  toggle?: boolean;
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = ({
@@ -14,6 +15,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   href,
   onClick,
   icon: Icon,
+  toggle,
 }) => {
   const router = useRouter();
 
@@ -27,8 +29,12 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   }, [href, onClick, router]);
 
   return (
-    <div onClick={handleClick} className="flex flex-col items-center">
+    <div
+      onClick={handleClick}
+      className={`flex flex-col items-center ${toggle ? "" : "hidden"}`}
+    >
       <Icon size={28} className="hover:cursor-pointer hover:animate-spin" />
+      <p className="text-xs">{label}</p>
     </div>
   );
 };

@@ -10,6 +10,7 @@ datasource db {
 model Video {
   id             String        @id @default(auto()) @map("_id") @db.ObjectId
   type           String
+  category       String
   videoId        String        @unique
   playlistItems  PlaylistItem[]
   title          String
