@@ -1,7 +1,17 @@
-export default function QuizPage() {
+import Layout from "@/components/Layout";
+import type { NextPageWithLayout } from "./_app";
+import type { ReactElement } from "react";
+
+const Quiz: NextPageWithLayout = () => {
   return (
-    <div>
+    <>
       <h1>Quiz Page</h1>
-    </div>
+    </>
   );
-}
+};
+
+Quiz.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
+
+export default Quiz;

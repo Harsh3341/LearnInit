@@ -7,7 +7,7 @@ import Topbar from "./layout/Topbar";
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen backdrop-blur-xl">
       <div className="flex h-full w-full sm:p-10 p-5 bg-white/30 justify-between relative">
         <Sidebar />
         <div className="flex h-full w-full md:w-11/12 items-center justify-between flex-col gap-5">
