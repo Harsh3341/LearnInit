@@ -1,8 +1,12 @@
 import useVideos from "@/hooks/useVideos";
 import PostItem from "./PostItem";
 
-const PostFeed = () => {
-  const { videos, isLoading, isError } = useVideos();
+interface PostFeedProps {
+  active: string;
+}
+
+const PostFeed: React.FC<PostFeedProps> = ({ active }) => {
+  const { videos, isLoading, isError } = useVideos(active);
 
   if (isLoading) {
     return <div>Loading...</div>;

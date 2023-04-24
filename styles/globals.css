@@ -13,3 +13,15 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+*::-webkit-scrollbar {
+  @apply sm:w-2 w-1;
+}
+
+*::-webkit-scrollbar-track {
+  @apply bg-black/20 rounded-3xl border border-black/20 border-double;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-black rounded-3xl;
+}

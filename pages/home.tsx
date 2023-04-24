@@ -6,8 +6,8 @@ export default function Home() {
   return (
     <div className="h-screen md:px-14 md:pt-14 px-5 pt-5">
       <div className="backdrop-blur-xl border-t-4 border-x-4 border-white rounded-t-3xl h-full flex-col">
-        <div className="w-full">
-          <ul className="flex gap-5 justify-end m-5">
+        <div className="w-full p-5">
+          <ul className="flex gap-5 justify-end">
             <Link
               className="border border-black p-1 rounded-xl font-bold bg-white/40 hover:bg-black hover:text-white transition ease-in-out delay-150"
               href=""
@@ -22,7 +22,7 @@ export default function Home() {
             </Link>
           </ul>
         </div>
-        <div className="h-full flex">
+        <div className="h-5/6 flex">
           <div className="w-2/4 h-full">
             <div className="md:h-1/2 h-1/3">
               <Logo width={150} height={150} />

@@ -14,7 +14,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="h-14 w-full">
             <Topbar />
           </div>
-          <div className="rounded-3xl w-full bg-white bg-opacity-20 overflow-auto h-full p-7 scrollbar-hide border border-black/20 shadow-inner scroll-smooth">
+          <div className="rounded-s-3xl w-full bg-white bg-opacity-20 overflow-auto h-full md:p-7 py-7 border border-black/20 shadow-inner scroll-smooth  overflow-x-hidden rounded-e-md">
             {children}
           </div>
         </div>

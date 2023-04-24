@@ -5,43 +5,54 @@ import { TbBrandNextjs } from "react-icons/tb";
 import { SiTailwindcss } from "react-icons/si";
 import { DiJavascript1 } from "react-icons/di";
 
-const CategoriesBar = () => {
+interface CategoriesBarProps {
+  active: string;
+  activeCategory: (name: string) => void;
+}
+
+const CategoriesBar: React.FC<CategoriesBarProps> = ({
+  active,
+  activeCategory,
+}) => {
   const categories = [
     {
       name: "All",
+      label: "all",
       icon: BiHomeAlt,
-      active: true,
     },
     {
       name: "Javascript",
+      label: "javascript",
       icon: DiJavascript1,
-      active: false,
     },
     {
-      name: "React",
+      name: "ReactJs",
+      label: "reactjs",
       icon: FaReact,
-      active: false,
     },
     {
-      name: "Next",
+      name: "NextJs",
+      label: "nextjs",
       icon: TbBrandNextjs,
-      active: false,
     },
     {
-      name: "Tailwind",
+      name: "Tailwind CSS",
+      label: "tailwindcss",
       icon: SiTailwindcss,
-      active: false,
     },
   ];
+
   return (
-    <div className="w-full overflow-hidden">
-      <div className="flex items-center scroll-smooth gap-3">
+    <div className="w-full overflow-hidden px-4">
+      <div className="flex items-center scroll-smooth gap-3 overflow-x-auto scrollbar-hide">
         {categories.map((category) => (
           <CategoriesItem
             key={category.name}
             name={category.name}
             icon={category.icon}
-            active={category.active}
+            active={active}
+            handleActive={activeCategory}
+            label={category.label}
           />
         ))}
       </div>

@@ -10,7 +10,7 @@ datasource db {
 model Video {
   id             String        @id @default(auto()) @map("_id") @db.ObjectId
   type           String
-  category       String
+  category       String[]
   videoId        String        @unique
   playlistItems  PlaylistItem[]
   title          String
@@ -21,7 +21,6 @@ model Video {
   channelId      String
   details        VideoDetails?
 }
-
 
 model PlaylistItem {
     id          String        @id @default(auto()) @map("_id") @db.ObjectId
