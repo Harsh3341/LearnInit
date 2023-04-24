@@ -1,8 +1,9 @@
 import useSWR from "swr";
 import fetcher from "@/libs/fetcher";
 
-const useVideos = () => {
-  const { data, error } = useSWR("/api/videos", fetcher);
+const useVideos = (name: string) => {
+  const url = `/api/videos?q=${name}`;
+  const { data, error } = useSWR(url, fetcher);
 
   return {
     videos: data,

@@ -21,7 +21,7 @@ const PostItem: React.FC<PostItemProps> = ({ data }) => {
       href={`https://www.youtube.com/watch?v=${data.videoId}`}
       key={data.id}
     >
-      <div key={data.id} className="mx-4 my-5 h-auto sm:w-96 w-80">
+      <div key={data.id} className="md:mx-4 my-5 h-auto sm:w-96 w-full">
         <div className="relative">
           <Image
             src={data.thumbnailUrl}
@@ -49,7 +49,7 @@ const PostItem: React.FC<PostItemProps> = ({ data }) => {
             <p className="text-sm text-gray-500">{data.channelTitle}</p>
           </div>
           <div className="flex gap-2 items-center bg-white bg-opacity-20 rounded-3xl p-1 hover:cursor-pointer border border-black/20 shadow-inner">
-            <p className="text-sm">{data.category}</p>
+            <p className="text-sm">{data.category[0]}</p>
           </div>
           <p className="text-sm text-gray-500">
             {video.details.viewCount} views

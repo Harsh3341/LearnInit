@@ -17,7 +17,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       type: item.id.kind || "",
       videoId: item.id.videoId || item.id.playlistId || item.id.channelId || "",
       title: item.snippet.title || "",
-      category: toSearch,
+      category: [toSearch, "all"],
       description: item.snippet.description || "",
       thumbnailUrl: item.snippet.thumbnails.medium.url || "",
       publishedAt: item.snippet.publishedAt || "",
