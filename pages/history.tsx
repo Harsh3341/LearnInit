@@ -1,7 +1,17 @@
-export default function HistoryPage() {
+import Layout from "@/components/Layout";
+import type { NextPageWithLayout } from "./_app";
+import type { ReactElement } from "react";
+
+const History: NextPageWithLayout = () => {
   return (
-    <div>
-      <h1>History Page</h1>
-    </div>
+    <>
+      <h1>History</h1>
+    </>
   );
-}
+};
+
+History.getLayout = function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>;
+};
+
+export default History;
