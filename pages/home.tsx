@@ -1,19 +1,34 @@
 import Logo from "@/components/layout/Logo";
+import useCurrentUser from "@/hooks/useCurrentUser";
+import useLoginModal from "@/hooks/useLoginModal";
 import Image from "next/image";
 import Link from "next/link";
+import { useCallback, useEffect } from "react";
+import router from "next/router";
 
 export default function Home() {
+  const loginModal = useLoginModal();
+  const onClick = useCallback(() => {
+    loginModal.onOpen();
+  }, [loginModal]);
+  const { data: currentUser } = useCurrentUser();
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/");
+    }
+  }, [currentUser]);
+
   return (
     <div className="h-screen md:px-14 md:pt-14 px-5 pt-5">
       <div className="backdrop-blur-xl border-t-4 border-x-4 border-white rounded-t-3xl h-full flex-col">
         <div className="w-full p-5">
           <ul className="flex gap-5 justify-end">
-            <Link
-              className="border border-black p-1 rounded-xl font-bold bg-white/40 hover:bg-black hover:text-white transition ease-in-out delay-150"
-              href=""
+            <li
+              className="border border-black p-1 rounded-xl font-bold bg-white/40 hover:bg-black hover:text-white transition ease-in-out delay-150 hover:cursor-pointer"
+              onClick={onClick}
             >
               SignIn
-            </Link>
+            </li>
             <Link
               className="border border-black p-1 rounded-xl font-bold bg-white/40 hover:bg-black hover:text-white transition ease-in-out delay-150"
               href="/"
