@@ -7,6 +7,27 @@ datasource db {
     url = env("MONGODB_URI")
 }
 
+model User {
+    id             String        @id @default(auto()) @map("_id") @db.ObjectId
+    name           String?
+    username       String?        @unique
+    email          String?        @unique
+    emailVerified  DateTime?
+    image          String?
+    hashedPassword String?
+    createdAt      DateTime       @default(now())
+    updatedAt      DateTime       @updatedAt
+
+    history        History[]
+}
+
+model History {
+    id       String        @id @default(auto()) @map("_id") @db.ObjectId
+    userId   String? @db.ObjectId
+    videoId     String?
+
+    user     User?   @relation(fields: [userId], references: [id])
+}
 model Video {
   id             String        @id @default(auto()) @map("_id") @db.ObjectId
   type           String
@@ -45,3 +66,4 @@ model VideoDetails {
     favoriteCount String
     commentCount String
 }
+
