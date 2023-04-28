@@ -10,11 +10,10 @@ export default async function handler(
   }
 
   try {
-    const { currentUser } = await serverAuth(req);
+    const { currentUser } = await serverAuth(req, res);
 
     res.status(200).json(currentUser);
   } catch (error) {
-    console.log(error);
-    res.status(400).json({ message: "Something went wrong" });
+    res.status(401).json({ message: "You are not authenticated" });
   }
 }

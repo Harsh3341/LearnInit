@@ -1,36 +1,30 @@
 import Logo from "@/components/layout/Logo";
-import useCurrentUser from "@/hooks/useCurrentUser";
 import useLoginModal from "@/hooks/useLoginModal";
+import { getSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect } from "react";
-import router from "next/router";
+import { useCallback } from "react";
+import { NextPageContext } from "next";
 
 export default function Home() {
   const loginModal = useLoginModal();
   const onClick = useCallback(() => {
     loginModal.onOpen();
   }, [loginModal]);
-  const { data: currentUser } = useCurrentUser();
-  useEffect(() => {
-    if (currentUser) {
-      router.push("/");
-    }
-  }, [currentUser]);
 
   return (
     <div className="h-screen md:px-14 md:pt-14 px-5 pt-5">
       <div className="backdrop-blur-xl border-t-4 border-x-4 border-white rounded-t-3xl h-full flex-col">
-        <div className="w-full p-5">
-          <ul className="flex gap-5 justify-end">
+        <div className="absolute top-0 right-0 md:w-1/5 flex p-2 justify-end">
+          <ul className="flex gap-5 justify-around">
             <li
-              className="border border-black p-1 rounded-xl font-bold bg-white/40 hover:bg-black hover:text-white transition ease-in-out delay-150 hover:cursor-pointer"
+              className="p-1 rounded-xl font-bold hover:bg-black hover:text-white transition ease-in-out delay-150 hover:cursor-pointer"
               onClick={onClick}
             >
               SignIn
             </li>
             <Link
-              className="border border-black p-1 rounded-xl font-bold bg-white/40 hover:bg-black hover:text-white transition ease-in-out delay-150"
+              className="p-1 rounded-xl font-bold hover:bg-black hover:text-white transition ease-in-out delay-150"
               href="/"
             >
               Home
@@ -68,4 +62,21 @@ export default function Home() {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
 }

@@ -27,6 +27,7 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         type={type}
         className="w-full p-4 text-lg  bg-white/30 border-2 border-black/50 rounded-md outline-none text-black focus:border-wi focus:border-2 transition disabled:bg-white-50 disabled:opacity-70 disabled:cursor-not-allowed placeholder-gray-800"
+        required
       />
     </div>
   );

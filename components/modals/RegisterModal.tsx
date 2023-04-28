@@ -6,10 +6,12 @@ import Input from "../Input";
 import Modal from "../Modal";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const RegisterModal = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
+  const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,9 +27,11 @@ const RegisterModal = () => {
   }, [loginModal, registerModal, isLoading]);
 
   const onSubmit = useCallback(async () => {
-    try {
-      setIsLoading(true);
+    if (isLoading) return;
 
+    setIsLoading(true);
+
+    try {
       await axios.post("/api/register", {
         email,
         password,
@@ -35,21 +39,25 @@ const RegisterModal = () => {
         username,
       });
 
-      toast.success("Successfully registered!");
-
-      signIn("credentials", {
+      const result = await signIn("credentials", {
+        redirect: false,
         email,
         password,
       });
 
-      registerModal.onClose();
-    } catch (e) {
-      console.log(e);
-      toast.error("Something went wrong!");
-    } finally {
-      setIsLoading(false);
+      if (result?.error) {
+        toast.error(result.error);
+      } else {
+        toast.success("Logged in");
+        router.push("/");
+        registerModal.onClose();
+      }
+    } catch (error: any) {
+      toast.error(error.response.data);
     }
-  }, [registerModal, email, password, name, username]);
+
+    setIsLoading(false);
+  }, [registerModal, email, password, name, username, isLoading, router]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -73,6 +81,7 @@ const RegisterModal = () => {
       />
       <Input
         placeholder="Password"
+        type="password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         disabled={isLoading}
@@ -81,11 +90,11 @@ const RegisterModal = () => {
   );
 
   const footerContent = (
-    <div className="text-center mt-4 text-neutral-400">
+    <div className="text-center mt-4 text-stone-700">
       <p>
         Already have an account?
         <span
-          className="text-white cursor-pointer hover:underline"
+          className="text-black cursor-pointer hover:underline"
           onClick={onToggle}
         >
           {" "}

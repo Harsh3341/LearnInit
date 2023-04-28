@@ -3,33 +3,42 @@ import useRegisterModal from "@/hooks/useRegisterModal";
 import { useCallback, useState } from "react";
 import Input from "../Input";
 import Modal from "../Modal";
+import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const LoginModal = () => {
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
+  const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const onToggle = useCallback(() => {
-    if (isLoading) return;
-
     loginModal.onClose();
     registerModal.onOpen();
-  }, [loginModal, registerModal, isLoading]);
+  }, [loginModal, registerModal]);
 
   const onSubmit = useCallback(async () => {
-    try {
-      setIsLoading(true);
+    setIsLoading(true);
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
 
+    if (result?.error) {
+      toast.error(result.error);
+    } else {
+      toast.success("Logged in");
+      router.push("/");
       loginModal.onClose();
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setIsLoading(false);
     }
-  }, [loginModal]);
+
+    setIsLoading(false);
+  }, [loginModal, email, password, router]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -41,6 +50,7 @@ const LoginModal = () => {
       />
       <Input
         placeholder="Password"
+        type="password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         disabled={isLoading}
@@ -49,11 +59,11 @@ const LoginModal = () => {
   );
 
   const footerContent = (
-    <div className="text-center mt-4 text-neutral-400">
+    <div className="text-center mt-4 text-stone-700">
       <p>
         New to the website?
         <span
-          className="text-white cursor-pointer hover:underline"
+          className="text-black cursor-pointer hover:underline"
           onClick={onToggle}
         >
           {" "}

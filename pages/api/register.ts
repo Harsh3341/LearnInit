@@ -7,11 +7,15 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
+    return res.status(405).json("Method not allowed");
   }
 
   try {
     const { name, email, username, password } = req.body;
+
+    if (!name || !email || !username || !password) {
+      return res.status(400).json("Missing fields");
+    }
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
@@ -27,6 +31,6 @@ export default async function handler(
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
-    res.status(400).json({ message: "Something went wrong" });
+    res.status(400).json("Something went wrong");
   }
 }

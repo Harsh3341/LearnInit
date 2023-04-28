@@ -25,3 +25,7 @@ body {
 *::-webkit-scrollbar-thumb {
   @apply bg-black rounded-3xl;
 }
+
+.placeholder-gray-800::placeholder {
+  color: #2d3748;
+}
