@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import type { NextPageWithLayout } from "./_app";
-import type { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { getSession } from "next-auth/react";
 import { NextPageContext } from "next";
 import quiz from "@/libs/quiz";
