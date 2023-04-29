@@ -1,13 +1,19 @@
 import Layout from "@/components/Layout";
 import type { NextPageWithLayout } from "./_app";
-import type { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { getSession } from "next-auth/react";
 import { NextPageContext } from "next";
+import quiz from "@/libs/quiz";
+import QuizFeed from "@/components/QuizFeed";
 
-const Quiz: NextPageWithLayout = () => {
+interface QuizProps {
+  quizData: any;
+}
+
+const Quiz: NextPageWithLayout<QuizProps> = ({ quizData }) => {
   return (
     <>
-      <h1>Quiz Page</h1>
+      <QuizFeed quizData={quizData} />
     </>
   );
 };
@@ -20,6 +26,13 @@ export default Quiz;
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
+  const quizData = await quiz();
+
+  if (!quizData) {
+    return {
+      notFound: true,
+    };
+  }
 
   if (!session) {
     return {
@@ -31,6 +44,6 @@ export async function getServerSideProps(context: NextPageContext) {
   }
 
   return {
-    props: { session },
+    props: { session, quizData },
   };
 }
