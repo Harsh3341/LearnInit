@@ -15,7 +15,7 @@ const Topbar = () => {
 
   return (
     <div className="h-full flex items-center md:justify-between justify-evenly">
-      <Logo width={100} height={100} />
+      <Logo width={50} height={100} />
       <div className="h-full flex items-center md:w-4/6 w-1/4 justify-end">
         {/* <Searchbar /> */}
 
