@@ -1,5 +1,6 @@
 import useVideos from "@/hooks/useVideos";
 import PostItem from "./PostItem";
+import Loading from "@/components/Loading/Loading";
 
 interface PostFeedProps {
   active: string;
@@ -9,7 +10,11 @@ const PostFeed: React.FC<PostFeedProps> = ({ active }) => {
   const { videos, isLoading, isError } = useVideos(active);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-full w-full flex justify-center items-center">
+        <Loading />
+      </div>
+    );
   }
   if (isError) {
     return <div>Error...</div>;

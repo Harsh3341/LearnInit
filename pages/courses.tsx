@@ -1,15 +1,11 @@
 import Layout from "@/components/Layout";
 import type { NextPageWithLayout } from "./_app";
-import type { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
 
 const History: NextPageWithLayout = () => {
-  return (
-    <>
-      <h1>History</h1>
-    </>
-  );
+  return <>Coming soon...</>;
 };
 
 History.getLayout = function getLayout(page: ReactElement) {

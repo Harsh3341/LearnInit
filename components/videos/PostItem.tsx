@@ -1,6 +1,7 @@
 import Link from "next/link";
 import useVideo from "@/hooks/useVideo";
 import Image from "next/image";
+import MyLoader from "@/components/MyLoader";
 
 interface PostItemProps {
   data: Record<string, any>;
@@ -10,7 +11,7 @@ const PostItem: React.FC<PostItemProps> = ({ data }) => {
   const { video, isLoading, isError } = useVideo(data.videoId);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <MyLoader />;
   }
   if (isError) {
     return <div>Error...</div>;

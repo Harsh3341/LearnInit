@@ -1,5 +1,5 @@
-import { BiHomeAlt, BiHistory } from "react-icons/bi";
-import { MdQuiz } from "react-icons/md";
+import { BiHomeAlt } from "react-icons/bi";
+import { MdQuiz, MdCastForEducation } from "react-icons/md";
 import SidebarItem from "./SidebarItem";
 import { FiSettings } from "react-icons/fi";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
@@ -19,9 +19,9 @@ const Sidebar = () => {
       href: "/quiz",
     },
     {
-      icon: BiHistory,
-      label: "History",
-      href: "/history",
+      icon: MdCastForEducation,
+      label: "Courses",
+      href: "/courses",
     },
   ];
 
