@@ -61,4 +61,6 @@ const CategoriesBar: React.FC<CategoriesBarProps> = memo(
   }
 );
 
+CategoriesBar.displayName = "CategoriesBar";
+
 export default CategoriesBar;
