@@ -67,8 +67,8 @@ const Sidebar = () => {
           >
             <FiSettings
               size={28}
-              className={`hover:cursor-pointer hover:animate-spin ${
-                isOpen ? "" : "hidden"
+              className={`hover:cursor-pointer  ${
+                isOpen ? "hover:animate-spin" : "hidden"
               }`}
             />
           </Link>

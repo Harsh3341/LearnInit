@@ -1,6 +1,6 @@
+import { useCallback } from "react";
 import { IconType } from "react-icons";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
 
 interface SidebarItemProps {
   label: string;
@@ -29,16 +29,18 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
   }, [href, onClick, router]);
 
   return (
-    <div
-      onClick={handleClick}
-      className={`flex flex-col items-center ${toggle ? "" : "hidden"}`}
-    >
-      <Icon
-        size={28}
-        className="hover:cursor-pointer hover:origin-bottom hover:-rotate-12"
-      />
-      <p className="text-xs">{label}</p>
-    </div>
+    <>
+      <div
+        onClick={handleClick}
+        className={`flex flex-col items-center ${toggle ? "" : "hidden"}`}
+      >
+        <Icon
+          size={28}
+          className="hover:cursor-pointer hover:origin-bottom hover:-rotate-12"
+        />
+        <p className="text-xs">{label}</p>
+      </div>
+    </>
   );
 };
 

@@ -9,8 +9,6 @@ interface QuizFeedProps {
 const QuizFeed: React.FC<QuizFeedProps> = ({ quizData }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
 
-  console.log(quizData);
-
   const handleNext = useCallback(() => {
     setCurrentQuestion(currentQuestion + 1);
   }, [currentQuestion]);

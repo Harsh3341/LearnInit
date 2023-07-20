@@ -7,6 +7,7 @@ import Modal from "../Modal";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import _ from "lodash";
 
 const RegisterModal = () => {
   const loginModal = useLoginModal();
@@ -33,7 +34,7 @@ const RegisterModal = () => {
 
     try {
       await axios.post("/api/register", {
-        email,
+        email: email.toLowerCase(),
         password,
         name,
         username,

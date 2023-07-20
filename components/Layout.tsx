@@ -1,9 +1,9 @@
+import Sidebar from "@/components/layout/Sidebar";
+import Topbar from "./layout/Topbar";
+
 interface LayoutProps {
   children: React.ReactNode;
 }
-
-import Sidebar from "@/components/layout/Sidebar";
-import Topbar from "./layout/Topbar";
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (

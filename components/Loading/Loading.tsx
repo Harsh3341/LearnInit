@@ -1,3 +1,5 @@
+import React from "react";
+
 const Loading = () => {
   return (
     <div className="loadingio-spinner-eclipse-w9wsvpkyhti">
@@ -7,4 +9,5 @@ const Loading = () => {
     </div>
   );
 };
-export default Loading;
+
+export default React.memo(Loading);

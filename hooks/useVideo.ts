@@ -4,7 +4,11 @@ import fetcher from "@/libs/fetcher";
 const useVideo = (videoId: string) => {
   const { data, error } = useSWR(
     videoId ? `/api/videos/${videoId}` : null,
-    fetcher
+    fetcher,
+    {
+      revalidateOnFocus: false,
+      refreshInterval: 30000,
+    }
   );
 
   return {
