@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 import prisma from "@/libs/prismadb";
-import { redis } from "@/libs/redis";
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,12 +14,6 @@ export default async function handler(
 
     if (!videoId) {
       return res.status(400).json({ message: "Video ID is required" });
-    }
-
-    const cachedData = await redis.get(`video:${videoId}`);
-
-    if (cachedData) {
-      return res.status(200).json(JSON.parse(cachedData));
     }
 
     const data = await prisma.video.findUnique({
@@ -47,8 +40,6 @@ export default async function handler(
       ...data,
       details: detailedData,
     };
-
-    redis.setex(`video:${videoId}`, 60 * 60 * 24, JSON.stringify(video));
 
     res.status(200).json(video);
   } catch (error: any) {
