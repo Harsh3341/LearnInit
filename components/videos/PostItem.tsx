@@ -14,7 +14,7 @@ const PostItem: React.FC<PostItemProps> = ({ data }) => {
     return <MyLoader />;
   }
   if (isError) {
-    return <div>Error...</div>;
+    return null;
   }
 
   return (
